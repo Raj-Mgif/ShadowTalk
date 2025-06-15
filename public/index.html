@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Chat App</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label, input, button { font-size: 1.2em; }
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="login-form">
+    <label for="name">Enter your name:</label><br />
+    <input type="text" id="name" required />
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      if (!name) return alert('Please enter your name');
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name })
+        });
+        if (!res.ok) throw new Error('Login failed');
+        const data = await res.json();
+        localStorage.setItem('userId', data.id);
+        localStorage.setItem('username', data.name);
+        localStorage.setItem('publicRooms', JSON.stringify(data.publicRooms));
+        window.location.href = 'home.html';
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

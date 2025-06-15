@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home - Chat App</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 10px; }
+    #user-info { margin-bottom: 20px; }
+    #friends-list, #chat-area { float: left; margin-right: 20px; }
+    #friends-list { width: 200px; }
+    #chat-area { width: 500px; }
+    #messages { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+    .message { margin-bottom: 10px; }
+    .message strong { color: #0066cc; }
+    #public-rooms { margin-bottom: 20px; }
+    input, button { font-size: 1em; padding: 5px; }
+  </style>
+</head>
+<body>
+
+  <div id="user-info">
+    <b>User:</b> <span id="username"></span> (<span id="user-id"></span>)
+  </div>
+
+  <div id="public-rooms">
+    <label>Join Public Room ID (1, 2 or 3): </label>
+    <input type="text" id="public-room-id" maxlength="1" size="1" />
+    <button id="join-public-room-btn">Join Room</button>
+  </div>
+
+  <div id="friends-list">
+    <h3>Friends</h3>
+    <ul id="friends"></ul>
+
+    <h4>Add Friend by ID</h4>
+    <input type="text" id="friend-id-input" maxlength="4" placeholder="Friend ID" />
+    <button id="add-friend-btn">Add Friend</button>
+  </div>
+
+  <div id="chat-area">
+    <h3>Chat</h3>
+    <div id="messages"></div>
+    <input type="text" id="chat-input" placeholder="Type your message" />
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
